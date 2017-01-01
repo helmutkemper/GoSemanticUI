@@ -12,7 +12,7 @@ type Button struct{
   Animated        bool
   ContentHidden   Content
   ContentVisible  Content
-  Icon            *Icon
+  Icon            Icon
   Modifiers       []string
 
   Variations      []string
@@ -24,7 +24,7 @@ func ( ButtonAStt Button ) IsEmpty() bool {
   return reflect.DeepEqual( ButtonAStt, Button{} )
 }
 
-func ( ButtonAStt Button ) Get () string {
+func ( ButtonAStt Button ) String() string {
   var buffer bytes.Buffer
 
   if ButtonAStt.Primary == true {
@@ -33,7 +33,7 @@ func ( ButtonAStt Button ) Get () string {
     buffer.WriteString( "secondary " )
   }
 
-  return `{{define "button"}}<button class="ui {{- range $k, $v := .Variations }}{{ $v }}
-  {{- end }}{{.Size}} {{.Color}} {{.Name}} {{- range $k, $v := .Modifiers }} {{ $v }}
-  {{- end }}button">{{.Label}}</button>{{end}}`
+  return `{{define "button"}}<button class="ui ` + buffer.String() + ` {{- range $k, $v := .Variations }}{{ $v }}
+  {{- end }}{{.Size}} {{.Color}} {{- range $k, $v := .Modifiers }} {{ $v }}
+  {{- end }}button">` + ButtonAStt.ContentVisible.String() + ButtonAStt.ContentHidden.String() + `{{.Label}}</button>{{end}}`
 }

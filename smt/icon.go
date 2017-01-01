@@ -17,7 +17,7 @@ func ( IconAStt Icon ) IsEmpty() bool {
 }
 
 func ( IconAStt Icon ) Get () string {
-  return `{{define "icon"}}<i class="{{- range $k, $v := .Variations }}{{ $v }}
+  return `<i class="{{- range $k, $v := .Variations }}{{ $v }}
   {{- end }} {{.Size}} {{.Color}} {{.Name}} {{- range $k, $v := .Modifiers }} {{ $v }}
-  {{- end }} icon"></i>{{end}}`
+  {{- end }} icon"></i>`
 }

@@ -6,7 +6,7 @@ import (
 )
 
 type Content struct{
-  Icon      *Icon
+  Icon      Icon
   RightIcon bool
   Text      string
   Visible   bool
@@ -16,9 +16,14 @@ func ( ContentAStt Content ) IsEmpty() bool {
   return reflect.DeepEqual( ContentAStt, Content{} )
 }
 
-func ( ContentAStt Content ) Get () string {
+func ( ContentAStt Content ) String () string {
+  if ContentAStt.IsEmpty() == true {
+    return ""
+  }
+
+
   var buffer bytes.Buffer
-  var icon Icon = ContentAStt.Icon
+  icon := ContentAStt.Icon
 
   buffer.WriteString( icon.Get() )
 
